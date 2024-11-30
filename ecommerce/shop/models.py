@@ -21,11 +21,11 @@ class Kategori(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-    def __str__(self):
+    def _str_(self):
         return self.name
 
 class Product(models.Model):
-    name = models.TextField(max_length=255,unique=True, verbose_name="Nama Produk")
+    name = models.TextField(max_length=255, unique=True, verbose_name="Nama Produk")
     slug = models.SlugField(max_length=100, unique=True, blank=True)
     description = models.TextField(verbose_name="Deskripsi", blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Harga")
@@ -37,7 +37,7 @@ class Product(models.Model):
     merek_produk = models.CharField(max_length=30, choices=[('waisted Jeans', 'waisted Jeans'), ('O&B', 'O&B'), ('Ae-Ri', 'Ae-Ri'), ('Dore', 'Dore'), ('SureDesign', 'SureDesign'), ('Walnuts','Walnuts')])
     bahan = models.CharField(max_length=20, default="Cotton")
     is_active = models.BooleanField(default=True, verbose_name="Aktif")
-    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='product_images/', blank=True, null=True, verbose_name="Gambar Produk")
 
     class Meta:
         verbose_name = "Produk"
@@ -52,24 +52,42 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Cart {self.id} for {self.user.username}"
+        return self.user.username 
 
+    @property
+    def total_price(self):
+        return sum(item.total_price() for item in self.cartitem_set.all())
+
+    @property
+    def total_items(self):
+        return sum(item.quantity for item in self.cartitem_set.all())
+
+# Model CartItem (Item dalam Keranjang)
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
     def total_price(self):
-        return sum(item.quantity * item.product.price for item in self.cartitem_set.all())
+        return self.quantity * self.product.price
 
     def __str__(self):
-        return f"{self.quantity} of {self.product.name}"
-    
+        return f"{self.quantity} x {self.product.name} in cart {self.cart.id}"
+
+    def save(self, *args, **kwargs):
+        # Pastikan quantity tidak kurang dari 1
+        if self.quantity is None or self.quantity <= 0:
+            self.quantity = 1  # Set default quantity to 1 jika invalid
+
+        super().save(*args, **kwargs)
+ 
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -82,7 +100,7 @@ class Order(models.Model):
         verbose_name = "Pesanan"
         verbose_name_plural = "Pesanan"
 
-    def __str__(self):
+    def _str_(self):
         return f"Order {self.id} by {self.user.username}"
     
 class OrderItem(models.Model):
@@ -91,5 +109,5 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.quantity} x {self.product.name} for order {self.order.id}"

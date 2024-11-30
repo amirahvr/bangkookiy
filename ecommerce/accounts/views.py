@@ -57,6 +57,11 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         return context
 
 # Login View
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
+from .forms import LoginForm
+
 def login_view(request):
     form = LoginForm(request.POST or None)
     if request.method == 'POST':
@@ -66,24 +71,25 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 if user.is_active:
+                    auth_login(request, user)
+                    # Cek apakah user adalah superuser, staff, atau pelanggan dan arahkan ke halaman yang sesuai
                     if user.is_superuser:
-                        auth_login(request, user)
-                        return redirect('dashboard_admin')
+                        return redirect('admin')
                     elif user.is_staff:
-                        auth_login(request, user)
-                        return redirect('dashboard_staff')
+                        return redirect('admin')
                     elif hasattr(user, 'is_pelanggan') and user.is_pelanggan:
-                        auth_login(request, user)
-                        return redirect('dashboard_pelanggan')
+                        return redirect('product_list')
                     else:
-                        messages.error(request, 'User type is not recognized.')
+                        # Arahkan ke halaman produk jika tidak ada ketentuan spesifik (misalnya pelanggan)
+                        return redirect('product_list')  # Arahkan ke halaman daftar produk
                 else:
-                    messages.error(request, 'Account is inactive.')
+                    messages.error(request, 'Akun Anda tidak aktif.')
             else:
-                messages.error(request, 'Invalid username or password.')
+                messages.error(request, 'Username atau password salah.')
         else:
-            messages.error(request, 'Error validating form.')
+            messages.error(request, 'Terjadi kesalahan dalam validasi form.')
     return render(request, 'accounts/login.html', {'form': form})
+
 
 # Signup View
 def signup_view(request):

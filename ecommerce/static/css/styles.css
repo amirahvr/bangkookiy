@@ -1,14 +1,16 @@
-/* Umum */
+/* Background Halaman */
 body {
-    background-color: #ffe4e6; /* Pink pastel lembut */
+    background-color: #ffd9e6; /* Pink pastel muda */
     font-family: 'Arial', sans-serif;
     color: #5c5c5c; /* Warna teks yang lembut */
     margin: 0;
     padding: 0;
 }
 
+/* Navbar */
 .navbar {
-    background-color: #ffc2d1; /* Pink pastel lebih terang */
+    background-color: #ffb3c6 !important; /* Warna navbar pink pastel yang soft */
+    padding: 0.5rem 1rem; /* Padding navbar */
 }
 
 .navbar-brand,
@@ -17,106 +19,96 @@ body {
 }
 
 .nav-link:hover {
-    color: #ff6f91 !important; /* Pink lebih mencolok saat hover */
+    color: #ff99b3 !important; /* Pink lebih mencolok saat hover */
 }
 
-/* Sidebar */
-.list-group-item {
-    background-color: #fff0f3; /* Pink pastel lembut */
-    border: none;
-    color: #5c5c5c;
-}
-
-.list-group-item a {
-    color: #5c5c5c;
-    text-decoration: none;
-}
-
-.list-group-item a:hover {
-    color: #ff6f91;
-    font-weight: bold;
-}
-
-.badge {
-    background-color: #ff6f91; /* Pink mencolok */
-    color: white;
-}
-
-/* Card Produk */
+/* Kotak Produk */
 .card {
-    display: flex;
-    flex-direction: column; /* Konten vertikal */
-    justify-content: space-between; /* Jarak antar elemen */
-    height: 100%; /* Pastikan tinggi card seragam */
-    border: 1px solid #eaeaea; /* Tambahkan border tipis */
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan ringan */
-    transition: transform 0.2s ease-in-out; /* Animasi hover */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 10px; /* Mengurangi margin antar card */
+    transition: transform 0.3s ease;
+    height: auto; /* Sesuaikan tinggi dengan konten */
 }
 
-.card-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #ff6f91; /* Warna teks judul */
-}
-
+/* Efek Hover pada Card */
 .card:hover {
-    transform: scale(1.05); /* Produk akan sedikit membesar saat di-hover */
+    transform: translateY(-5px); /* Efek hover */
 }
 
-.card-text {
-    font-size: 0.9rem;
-    color: #5c5c5c;
-}
-
+/* Gambar pada Card (Produk) */
 .card-img-top {
-    object-fit: cover; /* Sesuaikan gambar */
-    height: 200px; /* Tetapkan tinggi konsisten */
-    width: 100%; /* Penuhi lebar card */
-    border-top-left-radius: 8px; /* Sudut gambar lebih halus */
-    border-top-right-radius: 8px; /* Sudut gambar lebih halus */
+    width: 100%; /* Gambar memenuhi lebar box */
+    height: 200px; /* Menetapkan tinggi tetap untuk gambar */
+    object-fit: cover; /* Membuat gambar tetap proporsional dan memenuhi box */
 }
 
-.btn-primary {
-    background-color: #ff6f91;
-    border-color: #ff6f91;
-    color: white;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #ff3b6c; /* Pink lebih gelap */
-}
-
-/* Responsivitas Grid */
-.row > [class*="col-"] {
+/* Kontainer Daftar Produk */
+.product-list-container .row {
     display: flex;
-    justify-content: center; /* Memastikan semua item sejajar secara horizontal */
+    flex-wrap: wrap;
+    justify-content: space-between; /* Menjaga jarak antar kolom */
+    margin: 0; /* Menghapus margin default */
 }
 
-.col-md-4,
-.col-sm-6,
-.col-lg-3 {
-    padding: 0 10px; /* Tambahkan padding antar card */
+/* Set Kolom Produk (4 kolom) */
+.product-list-container .row .col-md-4 {
+    padding: 0 10px; /* Mengurangi padding kolom untuk membuat produk lebih rapat */
+    box-sizing: border-box; /* Memastikan padding tidak menambah ukuran total kolom */
+    flex-basis: 23%; /* Menjaga 4 produk dalam satu baris */
+    max-width: 23%;   /* Maksimal 23% dari lebar kontainer */
 }
 
-/* Custom Container */
-.custom-container {
-    max-width: 1200px; /* Lebar container diperluas */
-    margin: 0 auto; /* Agar container selalu berada di tengah */
-    padding-left: 15px;
-    padding-right: 15px;
+/* Gambar Produk pada Halaman Detail (tampilan responsive) */
+.full-screen-container .row img {
+    width: 100%; /* Gambar memenuhi kolom */
+    max-height: 500px; /* Membatasi tinggi gambar supaya tidak terlalu besar */
+    object-fit: contain; /* Menjaga proporsi gambar tetap terjaga */
 }
 
+/* Mengatur gambar supaya tidak meluber di luar kolom */
+.full-screen-container .row .col-md-6 img {
+    max-width: 100%; /* Pastikan gambar tidak melampaui lebar kolom */
+    height: auto; /* Menjaga aspek rasio gambar */
+}
 
+/* Gambar Produk pada Halaman Detail */
+.product-detail-img {
+    width: 100%;          /* Gambar memenuhi kolom secara horizontal */
+    max-width: 700px;     /* Membatasi lebar gambar, Anda bisa menyesuaikan sesuai preferensi */
+    height: auto;         /* Menjaga rasio aspek gambar tetap */
+    margin: 0 auto;       /* Menjaga gambar tetap terpusat */
+    object-fit: contain;  /* Menjaga gambar tetap proporsional tanpa memotong */
+}
 
-/* Footer */
-footer {
-    background-color: #ffc2d1;
-    color: #5c5c5c;
-    padding: 20px 10px; /* Sesuaikan padding */
-    margin-top: 30px;
-    text-align: center; /* Teks di tengah */
-    border-radius: 8px;
-    font-size: 0.9rem;
+/* Responsivitas: Menyesuaikan gambar pada layar kecil */
+@media (max-width: 768px) {
+    /* Gambar di Card */
+    .card-img-top {
+        height: 180px; /* Menyesuaikan tinggi gambar di layar kecil */
+    }
+
+    /* Gambar Produk di Detail */
+    .product-detail-img {
+        max-width: 90%;  /* Mengurangi ukuran gambar di layar kecil */
+        margin: 0 auto;  /* Menjaga gambar tetap terpusat */
+    }
+
+    /* Padding kontainer */
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Padding navbar */
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    /* Pengaturan ulang kolom produk */
+    .product-list-container .row .col-md-4 {
+        flex-basis: 48%; /* Membuat kolom produk lebih besar di layar kecil */
+        max-width: 48%;   /* Menyesuaikan lebar kolom pada layar kecil */
+    }
 }

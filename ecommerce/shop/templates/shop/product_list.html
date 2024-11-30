@@ -42,7 +42,7 @@
             <!-- Cart di sebelah kanan -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart/">
+                    <a class="nav-link" href="{% url 'cart_detail'%}">
                         <i class="fa fa-shopping-cart fa-2x"></i> <!-- Ikon keranjang besar -->
                     </a>
                 </li>
@@ -54,23 +54,22 @@
 
 
     <!-- Blok Utama -->
-    <div class="custom-container mt-4">
-        {% block list_content %}
-        <!-- Konten default dari product_list -->
+    <div class="product-list-container">
+        <!-- Konten produk yang terpusat -->
         <div class="row">
             {% for product in products %}
-                <div class="col-md-4 col-sm-6 col-lg-3 mb-4 d-flex align-items-stretch">
-                    <div class="card w-100">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
                         {% if product.image %}
                             <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                         {% else %}
                             <img src="https://via.placeholder.com/300" class="card-img-top" alt="No image available">
                         {% endif %}
-                        <div class="card-body d-flex flex-column">
+                        <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description|truncatewords:10 }}</p>
-                            <p class="card-text mt-auto"><strong>Rp{{ product.price|floatformat:2 }}</strong></p>
-                            <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">Lihat Detail</a>
+                            <p class="card-text"><strong>Rp{{ product.price|floatformat:2 }}</strong></p>
+                            <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -78,17 +77,12 @@
                 <p class="text-muted">Tidak ada produk dalam kategori ini.</p>
             {% endfor %}
         </div>
-        {% endblock %}
-
-        {% block extra_content %}
-        <!-- Kosong secara default -->
-        {% endblock %}
-    </div>
+    </div>    
 
     <!-- Footer -->
     {% block footer %}
     <footer class="text-center mt-4">
-        <p>&copy; 2024 Toko Kami. All rights reserved.</p>
+        <p>&copy; 2024 Bangkookiy. All rights reserved.</p>
     </footer>
     {% endblock %}
 
