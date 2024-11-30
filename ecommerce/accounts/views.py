@@ -10,10 +10,12 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.translation import gettext as _
+import logging
+
 
 User = get_user_model()
 
-# Custom Password Reset View
+# Custom Password Reset Vieww
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
     success_url = '/accounts/reset/password/done/'
@@ -25,7 +27,13 @@ class CustomPasswordResetView(PasswordResetView):
         if not associated_users.exists():
             messages.error(self.request, 'Email address is not registered.')
             return self.form_invalid(form)
+
+        # Tambahkan logging untuk debugging
+        logger = logging.getLogger(__name__)
+        logger.info(f"Password reset requested for email: {email}")
+        
         return super().form_valid(form)
+
 
 # Custom Password Reset Confirm View
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
@@ -56,11 +64,6 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         context['validlink'] = self.validlink
         return context
 
-# Login View
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as auth_login
-from django.contrib import messages
-from .forms import LoginForm
 
 def login_view(request):
     form = LoginForm(request.POST or None)

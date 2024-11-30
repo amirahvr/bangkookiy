@@ -153,5 +153,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # URL untuk mengakses file media (gambar)
 MEDIA_URL = '/media/'
 
-# Mengatur halaman yang akan dituju setelah login
-LOGIN_REDIRECT_URL = 'product_list'  # Ganti dengan nama URL untuk product list
