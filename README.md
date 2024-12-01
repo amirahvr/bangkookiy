@@ -39,7 +39,7 @@ Kelompok 7
 
 ![Screenshot 2024-12-01 003408](https://github.com/user-attachments/assets/a013f62f-9a63-41e4-b01d-5e099a1ca9a1)
 
-8. Mmebuat folder template untuk html dan folder static untuk css
+8. Membuat folder template untuk html dan folder static untuk css
 
 ![Screenshot 2024-12-01 114958](https://github.com/user-attachments/assets/cab2f434-d8fb-43c6-9944-e54a6cfcb954)
 
