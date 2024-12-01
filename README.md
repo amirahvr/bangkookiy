@@ -39,31 +39,36 @@ Kelompok 7
 
 ![Screenshot 2024-12-01 003408](https://github.com/user-attachments/assets/a013f62f-9a63-41e4-b01d-5e099a1ca9a1)
 
-8. SHOP
+8. Mmebuat folder template untuk html dan folder static untuk css
+
+![Screenshot 2024-12-01 114958](https://github.com/user-attachments/assets/cab2f434-d8fb-43c6-9944-e54a6cfcb954)
+
+
+9. SHOP
 
 ![Screenshot 2024-12-01 003509](https://github.com/user-attachments/assets/2fe44aa0-59cb-460f-a8b3-5b93b8251f30)
 
 ![Screenshot 2024-12-01 003532](https://github.com/user-attachments/assets/b2ca53a2-d6b8-4a6f-9af8-ff485a155877)
 
-9. Kategori Produk
+10. Kategori Produk
 
 ![Screenshot 2024-12-01 003542](https://github.com/user-attachments/assets/5e52a68b-576f-40bf-8776-d22f9c0fe7da)
 
 ![Screenshot 2024-12-01 003551](https://github.com/user-attachments/assets/3ffb6986-88dd-497b-ab44-4b1152384900)
 
 
-10. Detail Produk
+11. Detail Produk
 
 ![Screenshot 2024-12-01 003605](https://github.com/user-attachments/assets/f370b2cc-62fe-48d7-8582-b3e9d7c37c68)
 
-11. Chekout
+12. Chekout
 
 ![Screenshot 2024-12-01 003617](https://github.com/user-attachments/assets/d82a9ba0-2f41-42e5-bb1d-00f0a4e14339)
 
-12. Order
+13. Order
 ![Screenshot 2024-12-01 003633](https://github.com/user-attachments/assets/ece908ba-4821-4979-ad5a-47474c330d2b)
 
-13. Shop in Django Administrator
+14. Shop in Django Administrator
 
 ![Screenshot 2024-12-01 004339](https://github.com/user-attachments/assets/d63bc179-456d-4c39-8c7d-396f6a54a356)
 
